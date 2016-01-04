@@ -7,7 +7,8 @@ namespace FileBox.Web.ViewModels
 {
     public class FilesFormModel
     {
-        public string FileName { get; set; }
+        public HttpPostedFileBase File { get; set; }
         public bool FileAccess { get; set; }
+        public int UserID { get; set; }
     }
 }

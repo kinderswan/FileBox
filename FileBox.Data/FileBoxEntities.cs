@@ -16,6 +16,7 @@ namespace FileBox.Data
 
         public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<FilesInfo> FilesInfos { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; } 
 
         public virtual void Commit()
         {

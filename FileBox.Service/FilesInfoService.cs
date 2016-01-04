@@ -11,9 +11,10 @@ namespace FileBox.Service
 {
     public interface IFilesInfoService
     {
-        IEnumerable<FilesInfo> GetFilesInfos(); 
-        string GetFileShortUrl(int id);
-        FilesInfo GetFileInfo(int id);
+        IEnumerable<FilesInfo> GetFilesInfos();
+        IEnumerable<FilesInfo> GetUserFiles(int userID);
+            FilesInfo GetFileInfo(int id);
+        UserInfo GetUserInfoFromFile(int id);
         void CreateFileInfo(FilesInfo fileInfo);
         void UpdateFileInfo(int id);
         void DeleteFileInfo(int id);
@@ -22,12 +23,14 @@ namespace FileBox.Service
     public class FilesInfoService : IFilesInfoService
     {
         private readonly IFilesInfoRepository _filesInfoRepository;
+        private readonly IUserInfoRepository _userInfoRepository;
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public FilesInfoService(IFilesInfoRepository filesInfoRepository, IUnitOfWork unitOfWork)
+        public FilesInfoService(IFilesInfoRepository filesInfoRepository, IUserInfoRepository userInfoRepository, IUnitOfWork unitOfWork)
         {
             _filesInfoRepository = filesInfoRepository;
+            _userInfoRepository = userInfoRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -36,9 +39,9 @@ namespace FileBox.Service
             return _filesInfoRepository.GetAll();
         }
 
-        public string GetFileShortUrl(int id)
+        public IEnumerable<FilesInfo> GetUserFiles(int userID)
         {
-            return _filesInfoRepository.GetById(id).ShortUrl;
+            return _filesInfoRepository.GetMany(f => f.UserInfoID == userID);
         }
 
         public FilesInfo GetFileInfo(int id)
@@ -46,7 +49,12 @@ namespace FileBox.Service
             return _filesInfoRepository.GetById(id);
         }
 
-        public void CreateFileInfo(FilesInfo fileInfo)
+        public UserInfo GetUserInfoFromFile(int id)
+        {
+            return _filesInfoRepository.GetById(id).UserInfo;
+        }
+
+        public void CreateFileInfo(FilesInfo fileInfo)//change that
         {
             _filesInfoRepository.Add(fileInfo);
         }

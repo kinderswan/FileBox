@@ -12,8 +12,20 @@ namespace FileBox.Data
     {
         protected override void Seed(FileBoxEntities context)
         {
-            GetUserInfos().ForEach(c => context.UserInfos.Add(c));
-            GetFilesInfos().ForEach(f => context.FilesInfos.Add(f));
+            foreach (var item in GetUserInfos())
+            {
+                context.UserInfos.Add(item);
+            }
+            context.Commit();
+            foreach (var item in GetFilesInfos())
+            {
+                context.FilesInfos.Add(item);
+            }
+            context.Commit();
+            foreach (var item in GetUserRoles())
+            {
+                context.UserRoles.Add(item);
+            }
             context.Commit();
         }
 
@@ -41,26 +53,45 @@ namespace FileBox.Data
                 }
             };
         }
+        private static List<UserRole> GetUserRoles()
+        {
+            return new List<UserRole>
+            {
+               new UserRole()
+               {
+                   UserInfoID = 1,
+                   Role = "Admin"
+               },
+               new UserRole()
+               {
+                   UserInfoID = 2,
+                   Role = "User"
+               },
+               new UserRole()
+               {
+                   UserInfoID = 3,
+                   Role = "Anonym"
+               }
+            };
+        }
         private static List<FilesInfo> GetFilesInfos()
         {
             return new List<FilesInfo>
             {
                 new FilesInfo()
                 {
-                    //UsrID = 1,
+                    UserInfoID = 1,
                     Extension = "A",
                     FileAccess = false,
                     FileName = "B",
-                    IsDirectory = false,
                     ShortUrl = "C"
                 },
                  new FilesInfo()
                 {
-                    //UsrID = 2,
+                    UserInfoID = 2,
                     Extension = "A",
                     FileAccess = false,
                     FileName = "B",
-                    IsDirectory = false,
                     ShortUrl = "C"
                 }
             };

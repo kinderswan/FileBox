@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Configuration\FilesInfoConfiguration.cs" />
     <Compile Include="Configuration\UserInfoConfiguration.cs" />
+    <Compile Include="Configuration\UserRoleConfiguration.cs" />
     <Compile Include="FileBoxEntities.cs" />
     <Compile Include="FileBoxSeedData.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FilesInfoRepository.cs" />
     <Compile Include="Repository\UserInfoRepository.cs" />
+    <Compile Include="Repository\UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileBox.Model\FileBox.Model.csproj">

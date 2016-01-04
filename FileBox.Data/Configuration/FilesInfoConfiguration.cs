@@ -14,10 +14,9 @@ namespace FileBox.Data.Configuration
         public FilesInfoConfiguration()
         {
             ToTable("FilesInfo");
-            HasKey(f => f.FilesInfoID);
-            Property(f => f.FilesInfoID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(f => f.Extension).HasMaxLength(6);
             Property(f => f.FileName).IsRequired();
+            HasRequired(u => u.UserInfo).WithMany(f=>f.Files).HasForeignKey(f=>f.UserInfoID).WillCascadeOnDelete();
         }
     }
 }

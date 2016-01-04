@@ -14,11 +14,8 @@ namespace FileBox.Data.Configuration
         public UserInfoConfiguration()
         {
             ToTable("UserInfo");
-            HasKey(u => u.UserInfoID);
             Property(u => u.Login).IsRequired();
-            Property(u => u.Password).IsRequired();
-
-
+            Property(u => u.Password).IsRequired(); 
         }
     }
 }

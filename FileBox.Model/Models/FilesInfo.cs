@@ -11,12 +11,11 @@ namespace FileBox.Model.Models
         public int FilesInfoID { get; set; }
         public string FileName { get; set; }
         public string Extension { get; set; }
-        public string Path { get; set; }
         public string ShortUrl { get; set; }
-        public bool IsDirectory { get; set; }
         public bool FileAccess { get; set; }
         public DateTime? WasCreated { get; set; }
-        public int UsrID { get; set; }
+
+        public int UserInfoID { get; set; }
         public UserInfo UserInfo { get; set; }
 
         public FilesInfo()

@@ -11,6 +11,7 @@ namespace FileBox.Web.ViewModels
         public int UserInfoID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
         public string Login { get; set; }
         public DateTime? WasCreated { get; set; }
         public string DirectoryPath { get; set; }

@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using FileBox.Data;
 using FileBox.Web.App_Start;
+using FileBox.Web.Areas.Admin;
+using FileBox.Web.Areas.Default;
 
 namespace FileBox.Web
 {
@@ -19,8 +21,6 @@ namespace FileBox.Web
         {
             System.Data.Entity.Database.SetInitializer(new FileBoxSeedData());
             AreaRegistration.RegisterAllAreas();
-
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Bootstrapper.Run();

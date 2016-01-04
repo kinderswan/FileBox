@@ -13,7 +13,9 @@ namespace FileBox.Service
     {
         //get all for admin
         IEnumerable<UserInfo> GetUserInfos();
-        UserInfo GetUserInfo(int id);
+        UserInfo GetUserInfo(string email);
+        UserInfo GetUserInfo(string email, string password);
+        string GetPath(int userID);
         void CreateUserInfo(UserInfo userInfo);
         void UpdateUserInfo(int id);
         void DeleteUserInfo(int id);
@@ -36,9 +38,21 @@ namespace FileBox.Service
             return _userInfoRepository.GetAll();
         }
 
-        public UserInfo GetUserInfo(int id)
+        public UserInfo GetUserInfo(string email)
         {
-            return _userInfoRepository.GetById(id);
+            return _userInfoRepository.GetAll().FirstOrDefault(u => string.Compare(u.Email, email, true) == 0);
+        }
+
+        public UserInfo GetUserInfo(string email, string password)
+        {
+            return
+                _userInfoRepository.GetAll()
+                    .FirstOrDefault(u => string.Compare(u.Email, email, true) == 0 && u.Password == password);
+        }
+
+        public string GetPath(int userID)
+        {
+            return _userInfoRepository.GetById(userID).DirectoryPath;
         }
 
         public void CreateUserInfo(UserInfo userInfo)

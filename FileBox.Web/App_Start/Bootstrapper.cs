@@ -9,6 +9,7 @@ using Autofac.Integration.Mvc;
 using FileBox.Data.Infrastructure;
 using FileBox.Data.Repository;
 using FileBox.Service;
+using FileBox.Web.Global.Auth;
 using FileBox.Web.Mappings;
 
 namespace FileBox.Web.App_Start
@@ -26,6 +27,7 @@ namespace FileBox.Web.App_Start
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
+            builder.RegisterType<CustomAuthentication>().As<IAuthentication>().InstancePerRequest();
 
             builder.RegisterAssemblyTypes(typeof(UserInfoRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
