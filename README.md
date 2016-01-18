@@ -1,2 +1,0 @@
-# FileBox
-Training project

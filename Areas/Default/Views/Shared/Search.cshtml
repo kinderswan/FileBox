@@ -1,0 +1,15 @@
+﻿@using FileBox.Web.ViewModels
+@if (Model != null)
+{
+    if (ViewBag.CurrentUser != null)
+    {
+        using (Html.BeginForm("Search", "File", FormMethod.Post, new { @class = "input-group" }))
+        {
+            @Html.TextBox("findFiles", null, new { @class = "form-control center-block", placeholder = "Search file" })
+
+            <span class="input-group-btn">
+                <button class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
+            </span>
+        }
+    }
+}

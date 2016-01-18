@@ -1,0 +1,56 @@
+﻿@model FileBox.Web.ViewModels.UserInfoViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Url</h2>
+@if (Model != null)
+{
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav">
+                <li>@Html.Partial("Search")</li>
+                <li><hr /></li>
+                <li>
+                    @using (Html.BeginForm("Upload", "File", FormMethod.Post,
+                        new { enctype = "multipart/form-data", @class = "form-inline" }))
+                    {
+                        @Html.Hidden("UserID", Model.UserInfoID)
+                        <span class="btn btn-default btn-file">
+                            Upload new file<input type="file" name="file" />
+                        </span>
+                        <button type="submit" class="btn btn-primary glyphicon glyphicon-upload pull-right"></button>
+                    }
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+            @foreach (var item in ViewBag.Files)
+            {
+                <div class="well col-sm-3 center-block" style="margin: 0.75rem;">
+                    <div style="width:75%">
+                        <label class="col-sm-2" style="text-align: center; padding: 0; margin-top: 0; text-overflow: ellipsis; width: 75%">@item.FileName</label>
+                    </div>
+                    <div class="btn-group-vertical pull-right" style="width: 25%">
+                        <a href="@Url.Action("EditFile", "File", new {id = item.FilesInfoID}, null)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+
+                        <a href="@Url.Action("Download", "File", item, null)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-floppy-save"></span>
+                        </a>
+                        <a href="@Url.Action("Delete", "File", item, null)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-floppy-remove"></span>
+                        </a>
+                        <button class="btn btn-primary" onclick="prompt('URL', '@ViewBag.ShortUrl@item.ShortUrl') ">
+                            url
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+

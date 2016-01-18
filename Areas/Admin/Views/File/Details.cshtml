@@ -1,0 +1,67 @@
+﻿@model FileBox.Web.ViewModels.FilesInfoViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FilesInfoViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("UserLogin")
+        </dt>
+
+        <dd>
+            @Html.ActionLink((string)ViewBag.UserLogin, "Details", "User", new {id = Model.UserInfoID}, null)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Extension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Extension)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileAccess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileAccess)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WasCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WasCreated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.FilesInfoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

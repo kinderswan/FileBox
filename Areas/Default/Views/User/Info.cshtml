@@ -1,0 +1,12 @@
+﻿@model FileBox.Web.ViewModels.UserInfoViewModel
+
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Login</h2>
+@if (ViewBag.IsAdmin == true)
+{
+    @Html.ActionLink("Go to admin page", "Index", new { area = "Admin", controller="Home" })
+}

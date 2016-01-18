@@ -1,5 +1,0 @@
-D:\Education\EpamTraining\FileBOX - course project\FileBox\FileBox.Model\bin\Debug\FileBox.Model.dll
-D:\Education\EpamTraining\FileBOX - course project\FileBox\FileBox.Model\bin\Debug\FileBox.Model.pdb
-D:\Education\EpamTraining\FileBOX - course project\FileBox\FileBox.Model\obj\Debug\FileBox.Model.csprojResolveAssemblyReference.cache
-D:\Education\EpamTraining\FileBOX - course project\FileBox\FileBox.Model\obj\Debug\FileBox.Model.dll
-D:\Education\EpamTraining\FileBOX - course project\FileBox\FileBox.Model\obj\Debug\FileBox.Model.pdb

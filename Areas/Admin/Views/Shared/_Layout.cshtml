@@ -1,0 +1,49 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("FileBox", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+                </div>
+                <ul class="nav navbar-nav pull-right">
+                    <li>@Html.ActionLink("Go to home page", "Index", "Home", new { area = "Default" }, null)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-offcanvas row-offcanvas-left">
+                <div class="col-xs-6 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+                    <ul class="nav">
+                        <li class="list-group-item">@Html.ActionLink("Users", "Index", "User", null, new { @class = "list-group-item" })</li>
+                        <li class="list-group-item">@Html.ActionLink("Files", "Index", "File", null, new { @class = "list-group-item" })</li>
+                        <li class="list-group-item">@Html.ActionLink("Roles", "Index", "Role", null, new { @class = "list-group-item" })</li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    @RenderBody()
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<footer class="navbar-fixed-bottom text-center">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
