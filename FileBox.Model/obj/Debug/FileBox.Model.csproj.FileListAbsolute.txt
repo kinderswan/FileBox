@@ -8,3 +8,8 @@ D:\FileBox\FileBox.Model\bin\Debug\FileBox.Model.pdb
 D:\FileBox\FileBox.Model\obj\Debug\FileBox.Model.csprojResolveAssemblyReference.cache
 D:\FileBox\FileBox.Model\obj\Debug\FileBox.Model.dll
 D:\FileBox\FileBox.Model\obj\Debug\FileBox.Model.pdb
+d:\FileBox — new version\FileBox.Model\bin\Debug\FileBox.Model.dll
+d:\FileBox — new version\FileBox.Model\bin\Debug\FileBox.Model.pdb
+d:\FileBox — new version\FileBox.Model\obj\Debug\FileBox.Model.csprojResolveAssemblyReference.cache
+d:\FileBox — new version\FileBox.Model\obj\Debug\FileBox.Model.dll
+d:\FileBox — new version\FileBox.Model\obj\Debug\FileBox.Model.pdb

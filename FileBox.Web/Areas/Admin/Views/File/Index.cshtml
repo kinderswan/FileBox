@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FileBox.Web.ViewModels.FilesInfoViewModel>
+﻿@model IEnumerable<FileBox.Web.ViewModels.FilesInfoMapModel>
 
 @{
     ViewBag.Title = "Index";
@@ -8,9 +8,10 @@
 <h2>Index</h2>
 
 <table class="table">
+ 
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserInfoID)
+            @Html.DisplayName("Author")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FileName)
@@ -24,38 +25,33 @@
         <th>
             @Html.DisplayNameFor(model => model.FileAccess)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WasCreated)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserInfoID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Extension)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileAccess)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WasCreated)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.FilesInfoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FilesInfoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.FilesInfoID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Extension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileAccess)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.FilesInfoID}) |
+                @Html.ActionLink("Details", "Details", new {id = item.FilesInfoID}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.FilesInfoID})
+            </td>
+        </tr>
+    }
 
 </table>

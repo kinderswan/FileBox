@@ -1,4 +1,5 @@
-﻿@model FileBox.Web.ViewModels.UserInfoViewModel
+﻿@using FileBox.Web.ViewModels
+@model FileBox.Web.ViewModels.UserInfoMapModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
@@ -8,21 +9,11 @@
 @if (Model != null)
 {
     <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-xs-6 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-xs-6 col-md-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <ul class="nav">
                 <li>@Html.Partial("Search")</li>
                 <li><hr /></li>
-                <li>
-                    @using (Html.BeginForm("Upload", "File", FormMethod.Post,
-                        new { enctype = "multipart/form-data", @class = "form-inline" }))
-                    {
-                        @Html.Hidden("UserID", Model.UserInfoID)
-                        <span class="btn btn-default btn-file">
-                            Upload new file<input type="file" name="file" />
-                        </span>
-                        <button type="submit" class="btn btn-primary glyphicon glyphicon-upload pull-right"></button>
-                    }
-                </li>
+                <li>@Html.Partial("UploadFile")</li>
             </ul>
         </div>
 
@@ -34,17 +25,32 @@
                         <label class="col-sm-2" style="text-align: center; padding: 0; margin-top: 0; text-overflow: ellipsis; width: 75%">@item.FileName</label>
                     </div>
                     <div class="btn-group-vertical pull-right" style="width: 25%">
-                        <a href="@Url.Action("EditFile", "File", new {id = item.FilesInfoID}, null)" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </a>
 
-                        <a href="@Url.Action("Download", "File", item, null)" class="btn btn-primary">
+                        <button class="btn btn-primary glyphicon glyphicon-edit" data-toggle="modal" data-target="#@item.FilesInfoID"></button>
+                        <div class="modal fade" id="@item.FilesInfoID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="vertical-alignment-helper">
+                                <div class="modal-dialog vertical-align-center">
+                                    <div class="modal-content" style="width:20%">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">Edit file</h4>
+                                        </div>
+                                        @{Html.RenderPartial("EditFile", (FilesInfoMapModel)item);}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="@Url.Action("Download", "File", new {id = item.FilesInfoID}, null)" class="btn btn-primary">
                             <span class="glyphicon glyphicon-floppy-save"></span>
                         </a>
-                        <a href="@Url.Action("Delete", "File", item, null)" class="btn btn-primary">
+                        <a href="@Url.Action("Delete", "File", new {id = item.FilesInfoID}, null)" class="btn btn-primary">
                             <span class="glyphicon glyphicon-floppy-remove"></span>
                         </a>
-                        <button class="btn btn-primary" onclick="prompt('URL', '@ViewBag.ShortUrl@item.ShortUrl') ">
+                        <button class="btn btn-primary" onclick=" prompt('url', '@ViewBag.ShortUrl@item.ShortUrl' ) ">
                             url
                         </button>
                     </div>

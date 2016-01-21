@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
-using AutoMapper;
 using FileBox.Data.Infrastructure;
 using FileBox.Model.Models;
 using FileBox.Service;
+using FileBox.Service.Interfaces;
 using FileBox.Web.Global.Auth;
+using FileBox.Web.Mappings;
 using FileBox.Web.ViewModels;
 
 namespace FileBox.Web.Areas.Admin.Controllers
@@ -16,17 +18,38 @@ namespace FileBox.Web.Areas.Admin.Controllers
     {
         public UserController() { }
 
-        public UserController(IUserInfoService uService, IAuthentication auth)
+        public UserController(IUserInfoService uService, IUserRoleService rService)
         {
             UserService = uService;
-            Auth = auth;
+            RoleService = rService;
         }
-        // GET: Admin/User
         public ActionResult Index()
         {
             var users = UserService.GetUserInfos();
-            var viewUsers = Mapper.Map<IEnumerable<UserInfo>, IEnumerable<UserInfoViewModel>>(users);
+            //var viewUsers = Mapper.Map<IEnumerable<UserInfo>, IEnumerable<UserInfoMapModel>>(users);
+            var viewUsers = users.Select(u => u.ToUserInfoMapModel());
             return View(viewUsers);
+        }
+
+        public ActionResult Create()
+        {
+            var roles = RoleService.GetRoleInfos().Select(r => r.ToUserRoleMapModel());
+            ViewBag.Roles = new SelectList(roles, "UserRoleID", "Role");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(UserInfoMapModel uModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = uModel.ToUserInfo();
+                user.Password = Crypto.SHA1(user.Password);
+                UserService.CreateUserInfo(user);
+                UserService.SaveUserInfo();
+                return RedirectToAction("Index");
+            }
+            return View(uModel);
         }
 
         public ActionResult Details(int? id)
@@ -35,34 +58,44 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 return RedirectToNotFoundPage;
             }
-            var user = UserService.GetUserInfo((int) id);
+            var user = UserService.GetUserInfo((int)id);
             if (user == null)
             {
                 return RedirectToNotFoundPage;
             }
-            return View(Mapper.Map<UserInfo, UserInfoViewModel>(user));
+            //var detailUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
+            var detailUser = user.ToUserInfoMapModel();
+            return View(detailUser);
         }
-        
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToNotFoundPage;
             }
-            var user = UserService.GetUserInfo((int) id);
+            var user = UserService.GetUserInfo((int)id);
             if (user == null)
             {
                 return RedirectToNotFoundPage;
             }
-            return View(Mapper.Map<UserInfo, UserInfoAdminModel>(user));
+            //var roles = Mapper.Map<IEnumerable<UserRole>, IEnumerable<UserRoleMapModel>>(RoleService.GetRoleInfos());
+            var roles = RoleService.GetRoleInfos().Select(r => r.ToUserRoleMapModel());
+            ViewBag.Roles = new SelectList(roles, "UserRoleID", "Role", id);
+            //var editUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
+            var editUser = user.ToUserInfoMapModel();
+            return View(editUser);
         }
 
         [HttpPost]
-        public ActionResult Edit(UserInfoAdminModel uModel)
+        public ActionResult Edit(UserInfoMapModel uModel)
         {
             if (ModelState.IsValid)
             {
-                var editUser = Mapper.Map<UserInfoAdminModel, UserInfo>(uModel);
+                //var editUser = Mapper.Map<UserInfoMapModel, UserInfo>(uModel);
+
+                var editUser = uModel.ToUserInfo();
+                editUser.Password = Crypto.SHA1(editUser.Password);
                 UserService.UpdateUserInfo(editUser);
                 UserService.SaveUserInfo();
                 return RedirectToAction("Index");
@@ -76,12 +109,14 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 return RedirectToNotFoundPage;
             }
-            var user = UserService.GetUserInfo((int) id);
+            var user = UserService.GetUserInfo((int)id);
             if (user == null)
             {
                 return RedirectToNotFoundPage;
             }
-            return View(Mapper.Map<UserInfo, UserInfoViewModel>(user));
+            //var deleteUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
+            var deleteUser = user.ToUserInfoMapModel();
+            return View(deleteUser);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -91,7 +126,7 @@ namespace FileBox.Web.Areas.Admin.Controllers
             UserService.SaveUserInfo();
             return RedirectToAction("Index");
         }
-        
+
     }
 
 }

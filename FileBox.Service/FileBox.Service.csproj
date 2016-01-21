@@ -40,13 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilesInfoService.cs" />
-    <Compile Include="IFilesInfoService.cs" />
-    <Compile Include="IUserInfoService.cs" />
-    <Compile Include="IUserRoleService.cs" />
-    <Compile Include="UserInfoService.cs" />
+    <Compile Include="Concrete\FilesInfoService.cs" />
+    <Compile Include="Interfaces\IFilesInfoService.cs" />
+    <Compile Include="Interfaces\IUserInfoService.cs" />
+    <Compile Include="Interfaces\IUserRoleService.cs" />
+    <Compile Include="Concrete\UserInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRoleService.cs" />
+    <Compile Include="Concrete\UserRoleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileBox.Data\FileBox.Data.csproj">

@@ -20,7 +20,6 @@ namespace FileBox.Data.Configuration
             Property(u => u.Password).IsRequired();
             Property(u => u.Email).IsRequired();
             HasMany(u => u.Files).WithRequired(u => u.UserInfo).HasForeignKey(u => u.UserInfoID);
-            HasMany(u => u.Roles).WithRequired(u => u.UserInfo).HasForeignKey(u => u.UserInfoID);
         }
     }
 }

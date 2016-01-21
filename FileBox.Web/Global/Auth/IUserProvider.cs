@@ -10,6 +10,6 @@ namespace FileBox.Web.Global.Auth
 {
     interface IUserProvider
     {
-        UserInfoAdminModel User { get; set; }
+        UserInfoMapModel User { get; set; }
     }
 }

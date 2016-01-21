@@ -1,34 +1,22 @@
-﻿@model FileBox.Web.ViewModels.FilesInfoAdminModel
+﻿@model FileBox.Web.ViewModels.FilesInfoMapModel
 
-
-<div class="modal-header">
-    <button type="button" class="hide" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>Edit file</h3>
-</div>
-<div>
-    @using (Html.BeginForm("EditFile", "File", FormMethod.Post))
-    {
-        @Html.ValidationSummary()
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(m=>m.FilesInfoID)
-        @Html.HiddenFor(m=>m.UserInfoID)
-        @Html.HiddenFor(m=>m.Extension)
-        @Html.HiddenFor(m => m.ShortUrl)
-        @Html.HiddenFor(m => m.WasCreated)
-        <div class="modal-body">
-            @Html.TextBoxFor(m=>m.FileName)
-            @Html.CheckBoxFor(m => m.FileAccess)
+@using (Html.BeginForm("EditFile", "File", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.Hidden("id", Model.FilesInfoID)
+    <div class="modal-body">
+        <div class="form-group text-center">
+            @Html.Label("FileName")
+            @Html.TextBox("newName", Model.FileName, new { @class = "form-control-static " })
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="submit">Save</button>
+        <div class="form-group text-center">
+            @Html.Label("File access ", new { @class = "control-label" })
+            @Html.CheckBox("fAccess", Model.FileAccess)
         </div>
-    }
-</div>
-
-<script type="text/javascript">
-    $(function () {
-        $('#approve-btn').click(function () {
-            $('#modal-container').modal('hide');
-        });
-    });
-</script>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+}

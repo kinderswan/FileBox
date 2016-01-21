@@ -17,6 +17,7 @@ namespace FileBox.Data.Configuration
             HasKey(r => r.UserRoleID);
             Property(r => r.UserRoleID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(r => r.Role).IsRequired();
+            HasMany(r => r.Users).WithRequired(r => r.UserRole).HasForeignKey(r => r.UserRoleID);
 
         }
         

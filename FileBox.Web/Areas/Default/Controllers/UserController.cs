@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 using FileBox.Data.Infrastructure;
 using FileBox.Model.Models;
 using FileBox.Service;
+using FileBox.Service.Interfaces;
 using FileBox.Web.Global.Auth;
+using FileBox.Web.Mappings;
 using FileBox.Web.ViewModels;
 
 namespace FileBox.Web.Areas.Default.Controllers
@@ -33,40 +34,41 @@ namespace FileBox.Web.Areas.Default.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View(new UserInfoFormModel());
+            return View(new UserInfoRegisterModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(UserInfoFormModel uFormModel)
+        public ActionResult Register(UserInfoRegisterModel uRegisterModel)
         {
-            if (UserService.GetUserInfos().Any(p => p.Login == uFormModel.Login))
+            if (UserService.GetUserInfos().Any(p => p.Login == uRegisterModel.Login))
             {
                 ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
             }
-            if (UserService.GetUserInfos().Any(p => p.Email == uFormModel.Email))
+            if (UserService.GetUserInfos().Any(p => p.Email == uRegisterModel.Email))
             {
                 ModelState.AddModelError("Email", "Пользователь с таким email уже существует");
             }
             if (ModelState.IsValid)
             {
-                var user = Mapper.Map<UserInfoFormModel, UserInfo>(uFormModel);
-                user.Roles.Add(RoleService.GetRoleInfo("User"));
-
+                //var user = Mapper.Map<UserInfoRegisterModel, UserInfo>(uRegisterModel);
+                var user = uRegisterModel.ToUserInfo();
+                user.UserRoleID = 2; //User default register
                 UserService.CreateUserInfo(user);
                 UserService.SaveUserInfo();
-
                 return RedirectToAction("Index", "Home");
 
             }
-            return View(new UserInfoFormModel());
+            return View(new UserInfoRegisterModel());
         }
 
         public ActionResult Info(string email)
         {
             var user = UserService.GetUserInfo(email);
             ViewBag.IsAdmin = Auth.CurrentUser.IsInRole("Admin");
-            return View(Mapper.Map<UserInfo, UserInfoViewModel>(user));
+            //var infoUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
+            var infoUser = user.ToUserInfoMapModel();
+            return View(infoUser);
         }
     }
 }

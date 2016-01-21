@@ -14,9 +14,10 @@ namespace FileBox.Model.Models
         public string ShortUrl { get; set; }
         public bool FileAccess { get; set; }
         public DateTime? WasCreated { get; set; }
+        public byte[] FileBytes { get; set; }
 
         public int UserInfoID { get; set; }
-        public UserInfo UserInfo { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
 
         public FilesInfo()
         {

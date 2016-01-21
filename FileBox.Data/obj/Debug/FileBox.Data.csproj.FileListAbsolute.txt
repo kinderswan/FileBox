@@ -22,3 +22,15 @@ D:\FileBox\FileBox.Data\bin\Debug\EntityFramework.SqlServer.xml
 D:\FileBox\FileBox.Data\obj\Debug\FileBox.Data.csprojResolveAssemblyReference.cache
 D:\FileBox\FileBox.Data\obj\Debug\FileBox.Data.dll
 D:\FileBox\FileBox.Data\obj\Debug\FileBox.Data.pdb
+d:\FileBox — new version\FileBox.Data\bin\Debug\FileBox.Data.dll.config
+d:\FileBox — new version\FileBox.Data\bin\Debug\FileBox.Data.dll
+d:\FileBox — new version\FileBox.Data\bin\Debug\FileBox.Data.pdb
+d:\FileBox — new version\FileBox.Data\bin\Debug\EntityFramework.dll
+d:\FileBox — new version\FileBox.Data\bin\Debug\EntityFramework.SqlServer.dll
+d:\FileBox — new version\FileBox.Data\bin\Debug\FileBox.Model.dll
+d:\FileBox — new version\FileBox.Data\bin\Debug\FileBox.Model.pdb
+d:\FileBox — new version\FileBox.Data\bin\Debug\EntityFramework.xml
+d:\FileBox — new version\FileBox.Data\bin\Debug\EntityFramework.SqlServer.xml
+d:\FileBox — new version\FileBox.Data\obj\Debug\FileBox.Data.csprojResolveAssemblyReference.cache
+d:\FileBox — new version\FileBox.Data\obj\Debug\FileBox.Data.dll
+d:\FileBox — new version\FileBox.Data\obj\Debug\FileBox.Data.pdb

@@ -13,8 +13,7 @@ namespace FileBox.Web.Global.Auth
     public interface IAuthentication
     {
         HttpContext HttpContext { get; set; }
-        UserInfoAdminModel Login(string email, string password, bool isPersistent);
-        UserInfoAdminModel Login(string email);
+        UserInfoMapModel Login(string email, string password, bool isPersistent);
         void LogOut();
         IPrincipal CurrentUser { get; }
     }

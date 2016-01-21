@@ -1,4 +1,4 @@
-﻿@model FileBox.Web.ViewModels.UserRoleViewModel
+﻿@model FileBox.Web.ViewModels.UserRoleMapModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>UserRoleViewModel</h4>
+    <h4>UserRoleMapModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,6 +38,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.UserRoleID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserRoleID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

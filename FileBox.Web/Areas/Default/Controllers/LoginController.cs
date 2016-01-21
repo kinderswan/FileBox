@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using AutoMapper;
 using FileBox.Data.Repository;
 using FileBox.Model.Models;
 using FileBox.Service;
+using FileBox.Service.Interfaces;
 using FileBox.Web.Global.Auth;
+using FileBox.Web.Mappings;
 using FileBox.Web.ViewModels;
 
 namespace FileBox.Web.Areas.Default.Controllers
@@ -23,30 +25,34 @@ namespace FileBox.Web.Areas.Default.Controllers
         // GET: Default/Login
         public ActionResult Index()
         {
-            return View(new UserInfoFormModel());
+            return View(new UserInfoRegisterModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(UserInfoFormModel userFormModel, bool isRemember = false)
+        public ActionResult Index(UserInfoRegisterModel userRegisterModel, bool isRemember = false)
         {
-
-            UserInfo userData = Mapper.Map<UserInfoFormModel, UserInfo>(userFormModel);
             ModelState.Remove("Login");
+            //var userData = Mapper.Map<UserInfoRegisterModel, UserInfo>(userRegisterModel);
+            var userData = userRegisterModel.ToUserInfo();
+            
             if (ModelState.IsValid)
             {
-                if (UserService.GetUserInfos().All(u => u.Email != userFormModel.Email))
+                if (UserService.GetUserInfos().All(u => u.Email != userRegisterModel.Email))
                 {
                     ModelState["Email"].Errors.Add("Input email is not registered in system");
                 }
-                var user = Auth.Login(userData.Email, userData.Password, isRemember);
-                if (user != null)
+                if (userData.Password == Crypto.SHA1(userRegisterModel.Password))
                 {
-                    return RedirectToAction("Index", "Home");
+                    var user = Auth.Login(userData.Email, userData.Password, isRemember);
+                    if (user != null)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 ModelState["Password"].Errors.Add("Password does not match");
             }
-            return View(new UserInfoFormModel());
+            return View(new UserInfoRegisterModel());
         }
         public ActionResult Logout()
         {

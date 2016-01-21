@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Principal;
-using System.Web;
+﻿using System.Reflection;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using AutoMapper.Internal;
 using FileBox.Data.Infrastructure;
-using FileBox.Data.Repository;
+using FileBox.Data.Infrastructure.Concrete;
+using FileBox.Data.Infrastructure.Interfaces;
+using FileBox.Data.Repository.Concrete;
 using FileBox.Service;
+using FileBox.Service.Concrete;
 using FileBox.Web.Global.Auth;
-using FileBox.Web.Global.FileWork;
-using FileBox.Web.Mappings;
 
-namespace FileBox.Web.App_Start
+namespace FileBox.Web
 {
     public class Bootstrapper
     {
         public static void Run()
         {
             SetAutofacContainer();
-            AutoMapperConfiguration.Configure();
         }
         private static void SetAutofacContainer()
         {
@@ -32,7 +26,6 @@ namespace FileBox.Web.App_Start
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
             builder.RegisterType<CustomAuthentication>().As<IAuthentication>().InstancePerRequest();
-            builder.RegisterType<FileOps>().As<IFileOps>().InstancePerRequest();
 
             builder.RegisterAssemblyTypes(typeof(UserInfoRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))

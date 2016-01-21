@@ -20,3 +20,14 @@ D:\FileBox\FileBox.Service\bin\Debug\EntityFramework.xml
 D:\FileBox\FileBox.Service\obj\Debug\FileBox.Service.csprojResolveAssemblyReference.cache
 D:\FileBox\FileBox.Service\obj\Debug\FileBox.Service.dll
 D:\FileBox\FileBox.Service\obj\Debug\FileBox.Service.pdb
+d:\FileBox — new version\FileBox.Service\bin\Debug\FileBox.Service.dll
+d:\FileBox — new version\FileBox.Service\bin\Debug\FileBox.Service.pdb
+d:\FileBox — new version\FileBox.Service\bin\Debug\FileBox.Data.dll
+d:\FileBox — new version\FileBox.Service\bin\Debug\FileBox.Model.dll
+d:\FileBox — new version\FileBox.Service\bin\Debug\EntityFramework.dll
+d:\FileBox — new version\FileBox.Service\bin\Debug\FileBox.Data.pdb
+d:\FileBox — new version\FileBox.Service\bin\Debug\FileBox.Model.pdb
+d:\FileBox — new version\FileBox.Service\bin\Debug\EntityFramework.xml
+d:\FileBox — new version\FileBox.Service\obj\Debug\FileBox.Service.csprojResolveAssemblyReference.cache
+d:\FileBox — new version\FileBox.Service\obj\Debug\FileBox.Service.dll
+d:\FileBox — new version\FileBox.Service\obj\Debug\FileBox.Service.pdb

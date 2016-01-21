@@ -1,4 +1,4 @@
-﻿@model FileBox.Web.ViewModels.FilesInfoAdminModel
+﻿@model FileBox.Web.ViewModels.FilesInfoMapModel
 
 @{
     ViewBag.Title = "Edit";
@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "File", FormMethod.Post, new{id = Model.FilesInfoID}))
 {
     @Html.AntiForgeryToken()
     
@@ -15,13 +15,11 @@
         <h4>FilesInfo</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.FilesInfoID)
-        @Html.HiddenFor(model=>model.UserInfoID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBox("newName", Model.FileName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,8 +41,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FileAccess, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.FileAccess)
+                <div class="checkbox checkbox-inline">
+                    @Html.CheckBox("fAccess", Model.FileAccess)
                     @Html.ValidationMessageFor(model => model.FileAccess, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -53,8 +51,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.WasCreated, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WasCreated, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WasCreated, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.WasCreated, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.WasCreated, "", new { @class = "text-danger"})
             </div>
         </div>
 

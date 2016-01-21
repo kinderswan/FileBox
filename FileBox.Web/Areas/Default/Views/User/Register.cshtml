@@ -1,4 +1,4 @@
-﻿@model FileBox.Web.ViewModels.UserInfoFormModel
+﻿@model FileBox.Web.ViewModels.UserInfoRegisterModel
 @{
     ViewBag.Title = "Register";
     Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
@@ -11,6 +11,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    @Html.HiddenFor(model => model.UserInfoID)
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-1" })
@@ -29,7 +30,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-1" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { @class = "form-control" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>

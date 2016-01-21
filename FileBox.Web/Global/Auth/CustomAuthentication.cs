@@ -4,9 +4,11 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
-using AutoMapper;
 using FileBox.Model.Models;
 using FileBox.Service;
+using FileBox.Service.Concrete;
+using FileBox.Service.Interfaces;
+using FileBox.Web.Mappings;
 using FileBox.Web.ViewModels;
 
 namespace FileBox.Web.Global.Auth
@@ -27,22 +29,13 @@ namespace FileBox.Web.Global.Auth
             _userInfoService = service;
         }
 
-        public UserInfoAdminModel Login(string email, string password, bool isPersistent)
+        public UserInfoMapModel Login(string email, string password, bool isPersistent)
         {
-            UserInfoAdminModel retUser = Mapper.Map<UserInfo, UserInfoAdminModel>(_userInfoService.GetUserInfo(email, password));
+            //var retUser = Mapper.Map<UserInfo, UserInfoMapModel>(_userInfoService.GetUserInfo(email, password));
+            var retUser = _userInfoService.GetUserInfo(email, password).ToUserInfoMapModel();
             if (retUser != null)
             {
                 CreateCookie(email, isPersistent);
-            }
-            return retUser;
-        }
-
-        public UserInfoAdminModel Login(string email)
-        {
-            UserInfoAdminModel retUser = Mapper.Map<UserInfo, UserInfoAdminModel>(_userInfoService.GetUserInfo(email));
-            if (retUser != null)
-            {
-                CreateCookie(email);
             }
             return retUser;
         }

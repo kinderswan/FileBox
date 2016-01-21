@@ -12,8 +12,7 @@ namespace FileBox.Model.Models
         public string Role { get; set; }
         public string RoleDescription { get; set; }
 
-        public int UserInfoID { get; set; }
-        public UserInfo UserInfo { get; set; } 
+        public virtual ICollection<UserInfo> Users { get; set; }
 
         public UserRole() { }
     }

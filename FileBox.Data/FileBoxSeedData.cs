@@ -12,16 +12,17 @@ namespace FileBox.Data
     {
         protected override void Seed(FileBoxEntities context)
         {
-            foreach (var item in GetUserInfos())
-            {
-                context.UserInfos.Add(item);
-            }
-            context.Commit();
             foreach (var item in GetUserRoles())
             {
                 context.UserRoles.Add(item);
             }
             context.Commit();
+            foreach (var item in GetUserInfos())
+            {
+                context.UserInfos.Add(item);
+            }
+            context.Commit();
+            
             
         }
 
@@ -33,22 +34,25 @@ namespace FileBox.Data
                 {
                     FirstName = "Pavel",
                     Login = "kinderswan",
-                    Password = "12345",
-                    Email = "gamanovichpavel@gmail.com"
+                    Password = "8cb2237d0679ca88db6464eac60da96345513964",
+                    Email = "gamanovichpavel@gmail.com",
+                    UserRoleID = 1
                 },
                 new UserInfo()
                 {
                     FirstName = "Alexey",
                     Login = "alex_1992",
-                    Password = "alexcrazy",
-                    Email = "alexsuponev@mail.com"
+                    Password = "0be17ae32bce5731dd1b4a8e2b1ad310a3653899",
+                    Email = "alexsuponev@mail.com",
+                    UserRoleID = 2
                 },
                 new UserInfo()
                 {
                     FirstName = "Mikhail",
                     Login = "stopman3000",
-                    Password = "password",
-                    Email = "mikhail.ivanov@gmail.com"
+                    Password = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8",
+                    Email = "mikhail.ivanov@gmail.com",
+                    UserRoleID = 2
                 }
             };
         }
@@ -58,13 +62,11 @@ namespace FileBox.Data
             {
                new UserRole()
                {
-                   Role = "Admin",
-                   UserInfoID = 1
+                   Role = "Admin"
                },
                new UserRole()
                {
-                   Role = "User",
-                   UserInfoID = 1
+                   Role = "User"
                }
             };
         }

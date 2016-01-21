@@ -7,6 +7,7 @@ using Autofac.Integration.Mvc;
 using FileBox.Data.Infrastructure;
 using FileBox.Model.Models;
 using FileBox.Service;
+using FileBox.Service.Interfaces;
 using FileBox.Web.Global.Auth;
 using FileBox.Web.ViewModels;
 
@@ -14,16 +15,14 @@ namespace FileBox.Web.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected static string ErrorPage = "~/Error";
-        protected static string NotFoundPage = "~/NotFoundPage";
-        protected static string LoginPage = "~/Login";
         protected IAuthentication Auth;
-        protected IUnitOfWork UnitOfWork;
         protected IUserInfoService UserService;
         protected IFilesInfoService FileService;
         protected IUserRoleService RoleService;
 
-        protected UserInfoAdminModel CurrentUser
+
+
+        protected UserInfoMapModel CurrentUser
         {
             get
             {
@@ -31,20 +30,18 @@ namespace FileBox.Web.Controllers
             }
         }
 
-        public RedirectResult RedirectToNotFoundPage
+        protected RedirectResult RedirectToNotFoundPage
         {
-            get { return Redirect(NotFoundPage); }
+            get { return Redirect("~/NotFoundPage"); }
         }
-
-        public RedirectResult RedirectToLoginPage
+        protected RedirectResult RedirectToForbiddenPage
         {
-            get { return Redirect(LoginPage); }
+            get { return Redirect("~/Forbidden"); }
         }
-
         protected override void OnException(ExceptionContext filterContext)
         {
             base.OnException(filterContext);
-            filterContext.Result = Redirect(ErrorPage);
+            filterContext.Result = Redirect("~/Error");
         }
     }
 }

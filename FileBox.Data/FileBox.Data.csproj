@@ -54,20 +54,20 @@
     <Compile Include="Configuration\UserRoleConfiguration.cs" />
     <Compile Include="FileBoxEntities.cs" />
     <Compile Include="FileBoxSeedData.cs" />
-    <Compile Include="Infrastructure\DbFactory.cs" />
-    <Compile Include="Infrastructure\Disposable.cs" />
-    <Compile Include="Infrastructure\IDbFactory.cs" />
-    <Compile Include="Infrastructure\IRepository.cs" />
-    <Compile Include="Infrastructure\IUnitOfWork.cs" />
-    <Compile Include="Infrastructure\RepositoryBase.cs" />
-    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Infrastructure\Concrete\DbFactory.cs" />
+    <Compile Include="Infrastructure\Concrete\Disposable.cs" />
+    <Compile Include="Infrastructure\Interfaces\IDbFactory.cs" />
+    <Compile Include="Infrastructure\Interfaces\IRepository.cs" />
+    <Compile Include="Infrastructure\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\Concrete\RepositoryBase.cs" />
+    <Compile Include="Infrastructure\Concrete\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\FilesInfoRepository.cs" />
-    <Compile Include="Repository\IFilesInfoRepository.cs" />
-    <Compile Include="Repository\IUserInfoRepository.cs" />
-    <Compile Include="Repository\IUserRoleRepository.cs" />
-    <Compile Include="Repository\UserInfoRepository.cs" />
-    <Compile Include="Repository\UserRoleRepository.cs" />
+    <Compile Include="Repository\Concrete\FilesInfoRepository.cs" />
+    <Compile Include="Repository\Interfaces\IFilesInfoRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserInfoRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserRoleRepository.cs" />
+    <Compile Include="Repository\Concrete\UserInfoRepository.cs" />
+    <Compile Include="Repository\Concrete\UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileBox.Model\FileBox.Model.csproj">

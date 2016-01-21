@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
+using System.Web.Mvc;
 using FileBox.Service;
+using FileBox.Service.Interfaces;
 
 namespace FileBox.Web.Global.Auth
 {
@@ -22,7 +24,7 @@ namespace FileBox.Web.Global.Auth
             {
                 return false;
             }
-            return _userIdentity.User.Roles.Any(item => item.Role == role);
+            return _userIdentity.User.UserRole.Role == role;
         }
 
         public IIdentity Identity

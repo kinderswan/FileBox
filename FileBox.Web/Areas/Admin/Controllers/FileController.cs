@@ -6,27 +6,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 using FileBox.Model.Models;
 using FileBox.Service;
+using FileBox.Service.Interfaces;
 using FileBox.Web.Global.Auth;
-using FileBox.Web.Global.FileWork;
+using FileBox.Web.Mappings;
 using FileBox.Web.ViewModels;
+using WebGrease.Css.Extensions;
 
 namespace FileBox.Web.Areas.Admin.Controllers
 {
     public class FileController : AdminController
     {
-        private readonly IFileOps _fileOperations;
         public FileController() { }
 
-        public FileController(IFilesInfoService fService, IUserInfoService uService, IFileOps fOps)
+        public FileController(IFilesInfoService fService, IUserInfoService uService)
         {
             FileService = fService;
             UserService = uService;
-            _fileOperations = fOps;
         }
-        // GET: Admin/File
+
         public ActionResult Index(int? id)
         {
             var files = FileService.GetFilesInfos();
@@ -34,7 +33,8 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 files = files.Where(f => f.UserInfoID == id);
             }
-            var viewFiles = Mapper.Map<IEnumerable<FilesInfo>, IEnumerable<FilesInfoViewModel>>(files);
+            //var viewFiles = Mapper.Map<IEnumerable<FilesInfo>, IEnumerable<FilesInfoMapModel>>(files);
+            var viewFiles = files.Select(t => t.ToFilesInfoMapModel());
             return View(viewFiles);
         }
 
@@ -44,14 +44,17 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 return RedirectToNotFoundPage;
             }
+
             var file = FileService.GetFileInfo((int)id);
             if (file == null)
             {
                 return RedirectToNotFoundPage;
             }
-            ViewBag.UserLogin = UserService.GetUserInfo(file.UserInfoID).Login;
 
-            return View(Mapper.Map<FilesInfo, FilesInfoViewModel>(file));
+            ViewBag.UserLogin = file.UserInfo.Login;
+            //var detailFiles = Mapper.Map<FilesInfo, FilesInfoMapModel>(file);
+            var detailFiles = file.ToFilesInfoMapModel();
+            return View(detailFiles);
         }
 
         public ActionResult Edit(int? id)
@@ -65,23 +68,26 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 return RedirectToNotFoundPage;
             }
-            var editFile = Mapper.Map<FilesInfo, FilesInfoAdminModel>(file);
-            TempData["OldFileModel"] = editFile;
+            //var editFile = Mapper.Map<FilesInfo, FilesInfoMapModel>(file);
+            var editFile = file.ToFilesInfoMapModel();
             return View(editFile);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(FilesInfoAdminModel fModel)
+        public ActionResult Edit(int id, string newName, bool fAccess)
         {
             if (ModelState.IsValid)
             {
-                var editFile = Mapper.Map<FilesInfoAdminModel, FilesInfo>(fModel);
+                var editFile = FileService.GetFileInfo(id);
+
+                editFile.FileName = newName;
+                editFile.FileAccess = fAccess;
+
                 FileService.UpdateFileInfo(editFile);
                 FileService.SaveFileInfo();
-                await _fileOperations.ChangeFileNameAsync((FilesInfoAdminModel)TempData["OldFileModel"], fModel);
                 return RedirectToAction("Index");
             }
-            return View(fModel);
+            return RedirectToAction("Edit", "File", new { id });
         }
 
         public ActionResult Delete(int? id)
@@ -95,17 +101,16 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 return RedirectToNotFoundPage;
             }
-            var deleteFile = Mapper.Map<FilesInfo, FilesInfoAdminModel>(file);
-            TempData["DeleteFile"] = deleteFile;
+            //var deleteFile = Mapper.Map<FilesInfo, FilesInfoMapModel>(file);
+            var deleteFile = file.ToFilesInfoMapModel();
             return View(deleteFile);
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
             FileService.DeleteFileInfo(id);
             FileService.SaveFileInfo();
-            await _fileOperations.DeleteFileAsync((FilesInfoAdminModel)TempData["DeleteFile"]);
             return RedirectToAction("Index");
         }
     }
