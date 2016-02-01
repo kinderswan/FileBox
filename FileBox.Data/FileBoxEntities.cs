@@ -12,12 +12,16 @@ namespace FileBox.Data
 {
     public class FileBoxEntities : DbContext
     {
-        public FileBoxEntities(): base("FileBoxEntities"){}
+        static FileBoxEntities()
+        {
+            System.Data.Entity.Database.SetInitializer(new FileBoxSeedData());
+        }
+        public FileBoxEntities() : base("FileBoxEntities") { }
         public FileBoxEntities(string connectionString) : base(connectionString) { }
 
         public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<FilesInfo> FilesInfos { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; } 
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public virtual void Commit()
         {

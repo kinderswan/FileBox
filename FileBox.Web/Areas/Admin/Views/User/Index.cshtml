@@ -1,44 +1,42 @@
 ﻿@model IEnumerable<FileBox.Web.ViewModels.UserInfoMapModel>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-}
+    @section main{
+        <h3>Registered users</h3>
+        <hr/>
+        <table class="table table-striped">
+            <tr><td class="warning">@Html.ActionLink("Create new", "Create")</td></tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Login)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserRole)
+                </th>
+                <th></th>
+            </tr>
 
-<h2>Index</h2>
-<table class="table">
-    <tr><td>@Html.ActionLink("Create new", "Create")</td></tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserRole)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserRole.Role)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.UserInfoID}) |
-                @Html.ActionLink("Details", "Details", new {id = item.UserInfoID}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.UserInfoID})
-            </td>
-        </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Login)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserRole.Role)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserInfoID }) <span class="glyphicon glyphicon-edit"></span> |
+                        @Html.ActionLink("Details", "Details", new {id = item.UserInfoID}) <span class="glyphicon glyphicon-info-sign"></span> |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.UserInfoID}) <span class="glyphicon glyphicon-remove-sign"></span>
+                    </td>
+                </tr>
+            }
+        </table>
     }
-</table>
 

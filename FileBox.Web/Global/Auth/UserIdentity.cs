@@ -40,9 +40,7 @@ namespace FileBox.Web.Global.Auth
         {
             if (!string.IsNullOrEmpty(email))
             {
-                //User = Mapper.Map<UserInfo, UserInfoMapModel>(service.GetUserInfo(email));
                 User = service.GetUserInfo(email).ToUserInfoMapModel();
-                int x = 5;
             }
         }
     }

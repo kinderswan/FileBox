@@ -11,6 +11,7 @@ namespace FileBox.Web.ViewModels
         [Required(ErrorMessage = "Choose file to download")]
         public HttpPostedFileBase File { get; set; }
         public bool FileAccess { get; set; }
+        [Required]
         public int UserID { get; set; }
     }
 }

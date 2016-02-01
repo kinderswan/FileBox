@@ -32,12 +32,12 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var role = RoleService.GetRoleInfo((int)id);
             if (role == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var detailRole = role.ToUserRoleMapModel();
             return View(detailRole);
@@ -47,12 +47,12 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var role = RoleService.GetRoleInfo((int)id);
             if (role == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var editRole = role.ToUserRoleMapModel();
             return View(editRole);
@@ -63,7 +63,6 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var editRole = Mapper.Map<UserRoleMapModel, UserRole>(rModel);
                 var editRole = rModel.ToUserRole();
 
                 RoleService.UpdateRole(editRole);
@@ -95,12 +94,12 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var role = RoleService.GetRoleInfo((int)id);
             if (role == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var deleteRole = role.ToUserRoleMapModel();
             return View(deleteRole);

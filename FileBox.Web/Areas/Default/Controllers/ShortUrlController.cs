@@ -25,11 +25,11 @@ namespace FileBox.Web.Areas.Default.Controllers
             var fInfo = FileService.GetFileInfo(name);
             if (fInfo == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             if (fInfo.FileAccess == false)
             {
-                return RedirectToForbiddenPage;
+                return new HttpStatusCodeResult(403);
             }
 
             byte[] fileBytes = fInfo.FileBytes;

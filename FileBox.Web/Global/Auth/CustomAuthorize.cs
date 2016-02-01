@@ -26,7 +26,7 @@ namespace FileBox.Web.Global.Auth
             }
             else
             {
-                filterContext.Result = new RedirectResult(@"~/Login");
+                filterContext.Result = new RedirectResult(@"~/Error/Forbidden");
             }
         }
     }

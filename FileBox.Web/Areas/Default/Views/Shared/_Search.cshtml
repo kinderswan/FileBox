@@ -1,0 +1,21 @@
+﻿@if (Model != null)
+{
+    if (ViewBag.CurrentUserExists == true)
+    {
+        var options = new AjaxOptions
+        {
+            UpdateTargetId = "filecontainer",
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace
+        };
+        using (Ajax.BeginForm("Search", "File", options))
+        {
+            <div class="input-group">
+                @Html.TextBox("findFiles", null, new { @class = "form-control", @placeholder = "Search for..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
+                </span>
+            </div>
+        }
+    }
+}

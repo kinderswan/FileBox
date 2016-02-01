@@ -57,13 +57,13 @@ namespace FileBox.Web.Global.Auth
         private void CreateCookie(string email, bool isPersistent = false)
         {
             var ticket = new FormsAuthenticationTicket(1, email, DateTime.Now,
-                DateTime.Now.Add(FormsAuthentication.Timeout), isPersistent, string.Empty,
+                DateTime.Now.Add(new TimeSpan(1, 0, 0)), isPersistent, string.Empty,
                 FormsAuthentication.FormsCookiePath);
             var encTicket = FormsAuthentication.Encrypt(ticket);
             var authCookie = new HttpCookie(CookieName)
             {
                 Value = encTicket,
-                Expires = DateTime.Now.Add(FormsAuthentication.Timeout)
+                Expires = DateTime.Now.Add(new TimeSpan(1,0,0))
             };
             HttpContext.Response.Cookies.Set(authCookie);
         }

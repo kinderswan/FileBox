@@ -10,8 +10,7 @@ namespace FileBox.Web.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.fileupload.js"));
+                        "~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));
 
@@ -24,15 +23,12 @@ namespace FileBox.Web.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                        "~/Scripts/CustomJsScripts.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/bootstrap-theme.css",
                 "~/Content/bootstrap.min.css",
-                "~/Content/Site.css",
-                "~/Content/jquery.fileupload.css"));
+                "~/Content/Site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

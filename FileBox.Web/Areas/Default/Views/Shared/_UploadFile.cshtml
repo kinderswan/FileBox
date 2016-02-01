@@ -1,0 +1,11 @@
+﻿@using (Html.BeginForm("Upload", "File", FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @InputExtensions.Hidden(Html, "UserID", Model.UserInfoID)
+    <div class="input-group">
+        <input type="file" name="file" />
+    </div>
+    <button type="submit" class="btn btn-default center-block">Upload</button>
+    @Html.ValidationMessage("File", new { @class = "text-danger" } )
+}

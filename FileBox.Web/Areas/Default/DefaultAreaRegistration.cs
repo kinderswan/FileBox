@@ -31,9 +31,6 @@ namespace FileBox.Web.Areas.Default
                 defaults: new { controller = "Home", action = "Index", fInfo = UrlParameter.Optional },
                 namespaces: new[] { "FileBox.Web.Areas.Default.Controllers" }
             );
-
-
-            
         }
     }
 }

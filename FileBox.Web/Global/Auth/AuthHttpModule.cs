@@ -10,7 +10,7 @@ namespace FileBox.Web.Global.Auth
     {
         public void Init(HttpApplication context)
         {
-            context.AuthenticateRequest += new EventHandler(this.Authenticate);
+            context.AuthenticateRequest += Authenticate;
         }
 
         public void Dispose()

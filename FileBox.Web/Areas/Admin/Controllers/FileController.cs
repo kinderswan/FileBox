@@ -33,7 +33,6 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 files = files.Where(f => f.UserInfoID == id);
             }
-            //var viewFiles = Mapper.Map<IEnumerable<FilesInfo>, IEnumerable<FilesInfoMapModel>>(files);
             var viewFiles = files.Select(t => t.ToFilesInfoMapModel());
             return View(viewFiles);
         }
@@ -42,17 +41,16 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
 
             var file = FileService.GetFileInfo((int)id);
             if (file == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
 
             ViewBag.UserLogin = file.UserInfo.Login;
-            //var detailFiles = Mapper.Map<FilesInfo, FilesInfoMapModel>(file);
             var detailFiles = file.ToFilesInfoMapModel();
             return View(detailFiles);
         }
@@ -61,14 +59,13 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var file = FileService.GetFileInfo((int)id);
             if (file == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
-            //var editFile = Mapper.Map<FilesInfo, FilesInfoMapModel>(file);
             var editFile = file.ToFilesInfoMapModel();
             return View(editFile);
         }
@@ -94,14 +91,13 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var file = FileService.GetFileInfo((int)id);
             if (file == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
-            //var deleteFile = Mapper.Map<FilesInfo, FilesInfoMapModel>(file);
             var deleteFile = file.ToFilesInfoMapModel();
             return View(deleteFile);
         }
@@ -112,6 +108,13 @@ namespace FileBox.Web.Areas.Admin.Controllers
             FileService.DeleteFileInfo(id);
             FileService.SaveFileInfo();
             return RedirectToAction("Index");
+        }
+        public FileResult Download(int id)
+        {
+            var file = FileService.GetFileInfo(id);
+            byte[] fileBytes = file.FileBytes;
+            var fileName = String.Format("{0}{1}", file.FileName, file.Extension);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
 }

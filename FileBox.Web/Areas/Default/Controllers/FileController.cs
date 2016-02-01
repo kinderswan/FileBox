@@ -39,18 +39,14 @@ namespace FileBox.Web.Areas.Default.Controllers
         {
             if (ModelState.IsValid && Request.Files[0] != null)
             {
-                //var file = Mapper.Map<FilesInfoUploadModel, FilesInfo>(fileModel);
                 var file = fileModel.ToFilesInfo();
-
                 using (var binaryReader = new BinaryReader(Request.Files[0].InputStream))
                 {
                     file.FileBytes = binaryReader.ReadBytes(Request.Files[0].ContentLength);
                 }
-
                 FileService.CreateFileInfo(file);
                 FileService.SaveFileInfo();
             }
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -61,12 +57,13 @@ namespace FileBox.Web.Areas.Default.Controllers
             var fileName = String.Format("{0}{1}", file.FileName, file.Extension);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
-
+        
         public ActionResult Delete(int id)
         {
             FileService.DeleteFileInfo(id);
             FileService.SaveFileInfo();
-            return RedirectToAction("Index", "Home");
+            return PartialView("_File", FileService.GetFilesInfos()
+                    .Where(f => f.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
         }
 
         [HttpPost]
@@ -74,45 +71,37 @@ namespace FileBox.Web.Areas.Default.Controllers
         {
             if (string.IsNullOrEmpty(findFiles))
             {
-                return RedirectToAction("Index", "Home");
+                return PartialView("_File", FileService.GetFilesInfos()
+                    .Where(f => f.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
             }
-
             var files = FileService.GetFilesInfos()
                     .Where(f => f.UserInfoID == CurrentUser.UserInfoID)
-                    .Where(f => f.FileName.ToLower().Contains(findFiles)).ToList();
-
+                    .Where(f => f.FileName.ToLower().Contains(findFiles));
             var extNames = FileService.GetFilesInfos()
                     .Where(f => f.UserInfoID == CurrentUser.UserInfoID)
-                    .Where(f => f.Extension.ToLower().Contains(findFiles)).ToList();
-
-            var viewFiles = files.Concat(extNames).Select(f => f.ToFilesInfoMapModel()).ToList();
-            //TempData["SearchFiles"] = Mapper.Map<IEnumerable<FilesInfo>, IEnumerable<FilesInfoMapModel>>(viewFiles);
-            TempData["SearchFiles"] = viewFiles;
-            return RedirectToAction("Index", "Home");
+                    .Where(f => f.Extension.ToLower().Contains(findFiles));
+            var viewFiles = files.Concat(extNames).Select(f => f.ToFilesInfoMapModel());
+            return PartialView("_File", viewFiles);
         }
 
-        public PartialViewResult EditFile(int id)
+        public ActionResult EditFile()
         {
-            //var viewFile = Mapper.Map<FilesInfo, FilesInfoMapModel>(FileService.GetFileInfo(id));
-            var viewFile = FileService.GetFileInfo(id).ToFilesInfoMapModel();
-            return PartialView("EditFile", viewFile);
+            return View();
         }
-
         [HttpPost]
-        public ActionResult EditFile(int? id, string newName, bool? fAccess)
+        public ActionResult EditFile(int fileId, string newName, bool fAccess)
         {
             if (ModelState.IsValid)
             {
-                var editFile = FileService.GetFileInfo((int)id);
+                var editFile = FileService.GetFileInfo(fileId);
 
                 editFile.FileName = newName;
-                editFile.FileAccess = (bool)fAccess;
-
+                editFile.FileAccess = fAccess;
                 FileService.UpdateFileInfo(editFile);
                 FileService.SaveFileInfo();
-                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            ModelState.Clear();
+            return PartialView("_File", FileService.GetFilesInfos().Where(u => u.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
         }
 
 

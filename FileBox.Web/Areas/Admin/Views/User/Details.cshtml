@@ -1,76 +1,72 @@
 ﻿@model FileBox.Web.ViewModels.UserInfoMapModel
 
-<div>
-    <h4>UserInfoMapModel</h4>
+@section main
+{
+    <h3>@Model.Login details</h3>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserInfoID)
-        </dt>
+    <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserInfoID)
-        </dd>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Login)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Login)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Login)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.WasCreated)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WasCreated)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.WasCreated)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.WasCreated)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserRole.Role)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserRole.Role)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserRole.Role)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserRole.Role)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.UserInfoID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserInfoID }) <span class="glyphicon glyphicon-edit"></span>|
+        <span class="glyphicon glyphicon-chevron-left"></span>@Html.ActionLink("Back to List", "Index")
+    </p>
+}

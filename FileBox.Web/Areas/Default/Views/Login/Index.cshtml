@@ -5,39 +5,30 @@
     Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Вход</h2>
-
-@using (Html.BeginForm("Index", "Login", FormMethod.Post))
+@section main
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new {@class="text-danger"})
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-1" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new {@class="form-control"})
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    <div class="container">
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {@class = "form-signin"}))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <h2 class="form-signin-heading">Please sign in</h2>
+
+            @Html.LabelFor(model => model.Email, new {@class = "sr-only"})
+            @Html.TextBoxFor(model => model.Email, new {@class = "form-control", @placeholder = "Email address", @required = "required", @autofocus = "autofocus"})
+            @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+
+            @Html.LabelFor(model => model.Password, new {@class = "sr-only"})
+            @Html.PasswordFor(model => model.Password, new {@class = "form-control", @placeholder = "Password", @required = "required", @autofocus = "autofocus"})
+            @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBox("isRemember", true) Remember me
+                </label>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, new {@class = "control-label col-md-1"})
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Stay in?", new { @class = "control-label col-md-1" })
-            <div class="col-md-10">
-                @Html.CheckBox("isRemember", true)
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-primary">
-                    Войти
-                </button>
-            </div>
-        </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        }
     </div>
 }
+

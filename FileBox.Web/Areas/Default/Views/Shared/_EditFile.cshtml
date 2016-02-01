@@ -1,0 +1,45 @@
+﻿
+
+@{
+    var options = new AjaxOptions
+    {
+        UpdateTargetId = "filecontainer",
+        HttpMethod = "Post",
+        OnSuccess = "$(function () {$('#myFormSubmit').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();});"
+    };
+    using (Ajax.BeginForm("EditFile", "File", options))
+    {
+        @Html.ValidationSummary()
+        @Html.AntiForgeryToken()
+        @Html.Hidden("fileId", (int)Model.FilesInfoID)
+        @*<div class="modal-body">
+            <div class="form-group text-center">
+                @Html.Label("FileName")
+                @Html.TextBox("newName", (string)Model.FileName, new { @class = "form-control-static " })
+            </div>
+            <div class="form-group text-center">
+                @Html.Label("File access ", new { @class = "control-label" })
+                @Html.CheckBox("fAccess", (bool)Model.FileAccess)
+            </div>
+        </div>*@
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label("File Name")
+                </dt>
+
+                <dd>
+                    @Html.TextBox("newName", (string) Model.FileName)
+                </dd>
+                <dt>@Html.Label("File access ")</dt>
+                <dd>@Html.CheckBox("fAccess", (bool)Model.FileAccess)</dd>
+            </dl>
+        </div>
+        <div class="modal-footer">
+            <button id="myFormSubmit" class="btn btn-primary" type="submit">
+                Save
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    }
+}

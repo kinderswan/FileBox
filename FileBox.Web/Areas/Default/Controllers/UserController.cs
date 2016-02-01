@@ -43,15 +43,14 @@ namespace FileBox.Web.Areas.Default.Controllers
         {
             if (UserService.GetUserInfos().Any(p => p.Login == uRegisterModel.Login))
             {
-                ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
+                ModelState.AddModelError("Login", "Sorry, user with the same login is already exists");
             }
             if (UserService.GetUserInfos().Any(p => p.Email == uRegisterModel.Email))
             {
-                ModelState.AddModelError("Email", "Пользователь с таким email уже существует");
+                ModelState.AddModelError("Email", "Sorry, user with the same email is already exists");
             }
             if (ModelState.IsValid)
             {
-                //var user = Mapper.Map<UserInfoRegisterModel, UserInfo>(uRegisterModel);
                 var user = uRegisterModel.ToUserInfo();
                 user.UserRoleID = 2; //User default register
                 UserService.CreateUserInfo(user);
@@ -66,9 +65,53 @@ namespace FileBox.Web.Areas.Default.Controllers
         {
             var user = UserService.GetUserInfo(email);
             ViewBag.IsAdmin = Auth.CurrentUser.IsInRole("Admin");
-            //var infoUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
             var infoUser = user.ToUserInfoMapModel();
             return View(infoUser);
+        }
+
+
+        public ActionResult Edit(string email)
+        {
+            if (email == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            var userEdit = UserService.GetUserInfo(email);
+            if (userEdit == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            return View(userEdit.ToUserInfoMapModel());
+        }
+
+        [HttpPost, ActionName("Edit")]
+        public ActionResult EditUser(UserInfoMapModel uModel)
+        {
+            if (UserService.GetUserInfos()
+                    .Where(u => u.Login != CurrentUser.Login)
+                    .Any(p => p.Login == uModel.Login))
+            {
+                ModelState.AddModelError("Login", "Sorry, user with the same login is already exists");
+            }
+            if (ModelState.IsValid)
+            {
+                
+                var user = uModel.ToUserInfo();
+                UserService.UpdateUserInfo(user);
+                UserService.SaveUserInfo();
+                return RedirectToAction("Info", "User", new { email = uModel.Email });
+            }
+            return View(uModel);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(404);
+            UserService.DeleteUserInfo((int)id);
+            UserService.SaveUserInfo();
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

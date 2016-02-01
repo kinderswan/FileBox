@@ -33,7 +33,6 @@ namespace FileBox.Web.Areas.Default.Controllers
         public ActionResult Index(UserInfoRegisterModel userRegisterModel, bool isRemember = false)
         {
             ModelState.Remove("Login");
-            //var userData = Mapper.Map<UserInfoRegisterModel, UserInfo>(userRegisterModel);
             var userData = userRegisterModel.ToUserInfo();
             
             if (ModelState.IsValid)

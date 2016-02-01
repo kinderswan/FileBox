@@ -1,57 +1,49 @@
 ﻿@model IEnumerable<FileBox.Web.ViewModels.FilesInfoMapModel>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-}
 
-<h2>Index</h2>
 
-<table class="table">
- 
-    <tr>
-        <th>
-            @Html.DisplayName("Author")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Extension)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FileAccess)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@section main{
+    <h3>Uploaded files</h3>
+    <hr/>
+    <table class="table table-user-information">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Extension)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileAccess)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.FilesInfoID}) |
-                @Html.ActionLink("Details", "Details", new {id = item.FilesInfoID}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.FilesInfoID})
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Extension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileAccess)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileAccess)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.FilesInfoID}) <span class="glyphicon glyphicon-edit"></span> |
+                    @Html.ActionLink("Details", "Details", new {id = item.FilesInfoID}) <span class="glyphicon glyphicon-info-sign"></span> |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.FilesInfoID}) <span class="glyphicon glyphicon-remove-sign"></span>
+                </td>
+            </tr>
+        }
+
+    </table>
+}

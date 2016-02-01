@@ -1,44 +1,36 @@
 ﻿@model IEnumerable<FileBox.Web.ViewModels.UserRoleMapModel>
+@section main{
 
-@{
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Index</h2>
-
-<table class="table">
-    <tr><td>@Html.ActionLink("Create new", "Create")</td></tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserRoleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoleDescription)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <h3> Roles in system</h3>
+    <hr/>
+    <table class="table table-striped">
+        <tr><td class="warning">@Html.ActionLink("Create new", "Create")</td></tr>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserRoleID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoleDescription)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.UserRoleID}) |
-                @Html.ActionLink("Details", "Details", new {id = item.UserRoleID}) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserRoleID })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleDescription)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserRoleID }) <span class="glyphicon glyphicon-edit"></span>|
+                    @Html.ActionLink("Details", "Details", new { id = item.UserRoleID }) <span class="glyphicon glyphicon-info-sign"></span> |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserRoleID }) <span class="glyphicon glyphicon-remove-sign"></span>
+                </td>
+            </tr>
+        }
+
+    </table>
+}

@@ -13,6 +13,7 @@ namespace FileBox.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
             routes.MapRoute(
                 name: "DefaultHome",
                 url: "{controller}/{action}/{id}",
@@ -23,6 +24,7 @@ namespace FileBox.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            
         }
     }
 }

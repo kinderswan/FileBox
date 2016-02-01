@@ -12,18 +12,10 @@ namespace FileBox.Data
     {
         protected override void Seed(FileBoxEntities context)
         {
-            foreach (var item in GetUserRoles())
-            {
-                context.UserRoles.Add(item);
-            }
+            GetUserRoles().ForEach(item=>context.UserRoles.Add(item));
             context.Commit();
-            foreach (var item in GetUserInfos())
-            {
-                context.UserInfos.Add(item);
-            }
+            GetUserInfos().ForEach(item=>context.UserInfos.Add(item));
             context.Commit();
-            
-            
         }
 
         private static List<UserInfo> GetUserInfos()

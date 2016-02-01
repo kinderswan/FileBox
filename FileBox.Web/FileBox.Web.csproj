@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Default\Controllers\DefaultController.cs" />
+    <Compile Include="Areas\Default\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Default\Controllers\FileController.cs" />
     <Compile Include="Areas\Default\Controllers\HomeController.cs" />
     <Compile Include="Areas\Default\Controllers\LoginController.cs" />
@@ -193,12 +194,18 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="App_Data\FileBoxDB.mdf" />
+    <Content Include="App_Data\FileBoxDB_log.ldf">
+      <DependentUpon>FileBoxDB.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\images\bg-filebox.png" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\index.png" />
     <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -217,11 +224,11 @@
     <Content Include="Areas\Default\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Default\Views\Shared\UserLogin.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\_UserLogin.cshtml" />
     <Content Include="Areas\Default\Views\Home\Index.cshtml" />
     <Content Include="Areas\Default\Views\Login\Index.cshtml" />
     <Content Include="Areas\Default\Views\User\Register.cshtml" />
-    <Content Include="Areas\Default\Views\Shared\Search.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\_Search.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
@@ -231,8 +238,8 @@
     <Content Include="Areas\Admin\Views\File\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
     <Content Include="Areas\Default\Views\User\Info.cshtml" />
-    <Content Include="Areas\Default\Views\Shared\EditFile.cshtml" />
-    <Content Include="Areas\Default\Views\Shared\UploadFile.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\_EditFile.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\_UploadFile.cshtml" />
     <Content Include="Areas\Admin\Views\User\Details.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
@@ -240,66 +247,24 @@
     <Content Include="Areas\Admin\Views\Role\Details.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Areas\Default\Views\Error\Forbidden.cshtml" />
+    <Content Include="Areas\Default\Views\Error\NotFoundPage.cshtml" />
+    <Content Include="Areas\Default\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Default\Views\Shared\_File.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\CustomJsScripts.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Areas\Default\Views\Error\TooLongFile.cshtml" />
+    <None Include="Scripts\jquery-2.2.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
     <Content Include="Scripts\jquery.moneymask.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.bg.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ca.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.cs.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.cy.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.da.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.de.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.el.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.es.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.et.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fa.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fi.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.gl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.he.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.hr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.hu.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.id.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.is.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.it.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ja.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ka.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.kk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.kr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.lt.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.lv.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.mk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ms.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.nb.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.nl-BE.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.nl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.no.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.pl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.pt-BR.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.pt.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ro.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.rs-latin.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.rs.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ru.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sq.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sv.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sw.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.th.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.tr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ua.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.vi.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -311,12 +276,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Default\Models\" />

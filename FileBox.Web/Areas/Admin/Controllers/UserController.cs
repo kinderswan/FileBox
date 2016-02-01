@@ -26,7 +26,6 @@ namespace FileBox.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var users = UserService.GetUserInfos();
-            //var viewUsers = Mapper.Map<IEnumerable<UserInfo>, IEnumerable<UserInfoMapModel>>(users);
             var viewUsers = users.Select(u => u.ToUserInfoMapModel());
             return View(viewUsers);
         }
@@ -43,6 +42,14 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (UserService.GetUserInfos().Any(p => p.Login == uModel.Login))
+                {
+                    ModelState.AddModelError("Login", "Sorry, user with the same login is already exists");
+                }
+                if (UserService.GetUserInfos().Any(p => p.Email == uModel.Email))
+                {
+                    ModelState.AddModelError("Email", "Sorry, user with the same email is already exists");
+                }
                 var user = uModel.ToUserInfo();
                 user.Password = Crypto.SHA1(user.Password);
                 UserService.CreateUserInfo(user);
@@ -56,14 +63,13 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var user = UserService.GetUserInfo((int)id);
             if (user == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
-            //var detailUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
             var detailUser = user.ToUserInfoMapModel();
             return View(detailUser);
         }
@@ -72,17 +78,15 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var user = UserService.GetUserInfo((int)id);
             if (user == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
-            //var roles = Mapper.Map<IEnumerable<UserRole>, IEnumerable<UserRoleMapModel>>(RoleService.GetRoleInfos());
             var roles = RoleService.GetRoleInfos().Select(r => r.ToUserRoleMapModel());
             ViewBag.Roles = new SelectList(roles, "UserRoleID", "Role", id);
-            //var editUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
             var editUser = user.ToUserInfoMapModel();
             return View(editUser);
         }
@@ -90,16 +94,22 @@ namespace FileBox.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(UserInfoMapModel uModel)
         {
+            var userLoginBeforeSave = UserService.GetUserInfo(uModel.UserInfoID).Login;
+            if (UserService.GetUserInfos()
+                    .Where(u => u.Login != userLoginBeforeSave)
+                    .Any(p => p.Login == uModel.Login))
+            {
+                ModelState.AddModelError("Login", "Sorry, user with the same login is already exists");
+            }
             if (ModelState.IsValid)
             {
-                //var editUser = Mapper.Map<UserInfoMapModel, UserInfo>(uModel);
-
                 var editUser = uModel.ToUserInfo();
-                editUser.Password = Crypto.SHA1(editUser.Password);
                 UserService.UpdateUserInfo(editUser);
                 UserService.SaveUserInfo();
                 return RedirectToAction("Index");
             }
+            var roles = RoleService.GetRoleInfos().Select(r => r.ToUserRoleMapModel());
+            ViewBag.Roles = new SelectList(roles, "UserRoleID", "Role", uModel.UserInfoID);
             return View(uModel);
         }
 
@@ -107,14 +117,13 @@ namespace FileBox.Web.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
             var user = UserService.GetUserInfo((int)id);
             if (user == null)
             {
-                return RedirectToNotFoundPage;
+                return new HttpStatusCodeResult(404);
             }
-            //var deleteUser = Mapper.Map<UserInfo, UserInfoMapModel>(user);
             var deleteUser = user.ToUserInfoMapModel();
             return View(deleteUser);
         }
