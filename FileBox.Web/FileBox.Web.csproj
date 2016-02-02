@@ -247,13 +247,11 @@
     <Content Include="Areas\Admin\Views\Role\Details.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
-    <Content Include="Areas\Default\Views\Error\Forbidden.cshtml" />
-    <Content Include="Areas\Default\Views\Error\NotFoundPage.cshtml" />
     <Content Include="Areas\Default\Views\User\Edit.cshtml" />
     <Content Include="Areas\Default\Views\Shared\_File.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Default\Views\Error\TooLongFile.cshtml" />
+    <Content Include="Areas\Default\Views\Error\Error.cshtml" />
     <None Include="Scripts\jquery-2.2.0-vsdoc.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />

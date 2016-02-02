@@ -2,7 +2,7 @@
 {
     if (ViewBag.CurrentUserExists == true)
     {
-        <li>@Html.ActionLink((string)Model.Login, "Info", "User", new { email = Model.Email }, null)</li>
+        <li>@Html.ActionLink((string)Model.Login, "Info", "User", null, null)</li>
     }
     <li>@Html.ActionLink("Log out", "Logout", "Login")</li>
 }

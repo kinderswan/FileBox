@@ -12,8 +12,12 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-            <h2 class="form-signin-heading">Please sign in</h2>
-
+            
+            if ((bool?)TempData["RegYes"] == true)
+            {
+                <h5 class="form-signin-heading">You have been succesfully registered.</h5>
+            }
+                <h2 class="form-signin-heading">Please sign in</h2>
             @Html.LabelFor(model => model.Email, new {@class = "sr-only"})
             @Html.TextBoxFor(model => model.Email, new {@class = "form-control", @placeholder = "Email address", @required = "required", @autofocus = "autofocus"})
             @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})

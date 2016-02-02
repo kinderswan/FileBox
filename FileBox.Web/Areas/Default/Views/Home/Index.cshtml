@@ -7,14 +7,14 @@
             <div class="col-xs-6 col-md-3 sidebar-offcanvas" id="sidebar" role="navigation">
                 <ul class="nav">
                     <li>@Html.Partial("_Search")</li>
-                    <li><hr/></li>
+                    <li><hr /></li>
                     <li>@Html.Partial("_UploadFile")</li>
-                    <li><hr/></li>
+                    <li><hr /></li>
                     <li>Total files usage : @ViewBag.TotalUsage kBs</li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-9" id="filecontainer" style="background: transparent">
-                @Html.Action("FilesData", "Home", new {id = Model.UserInfoID})
+                @Html.Action("FilesData", "Home", new { id = Model.UserInfoID })
             </div>
 
         </div>
@@ -22,8 +22,7 @@
     else
     {
         <h1 class="text-center">Welcome to FILEBOX!</h1>
-        <br/><br/>
-        <div style="margin:0 auto 0 auto; text-align: center;">
+        <div style="margin:15% auto 0 auto; text-align: center;">
             <a href="@Url.Action("Index", "Login")" class="btn btn-default btn-xlarge btn-info" type="button">Start work</a>
             <p>@Html.ActionLink("Not registered yet?", "Register", "User")</p>
         </div>

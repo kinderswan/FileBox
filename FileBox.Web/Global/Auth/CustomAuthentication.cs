@@ -31,7 +31,6 @@ namespace FileBox.Web.Global.Auth
 
         public UserInfoMapModel Login(string email, string password, bool isPersistent)
         {
-            //var retUser = Mapper.Map<UserInfo, UserInfoMapModel>(_userInfoService.GetUserInfo(email, password));
             var retUser = _userInfoService.GetUserInfo(email, password).ToUserInfoMapModel();
             if (retUser != null)
             {

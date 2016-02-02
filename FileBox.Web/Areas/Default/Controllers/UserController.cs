@@ -55,33 +55,22 @@ namespace FileBox.Web.Areas.Default.Controllers
                 user.UserRoleID = 2; //User default register
                 UserService.CreateUserInfo(user);
                 UserService.SaveUserInfo();
-                return RedirectToAction("Index", "Home");
-
+                TempData["RegYes"] = true;
+                return RedirectToAction("Index", "Login");
             }
             return View(new UserInfoRegisterModel());
         }
 
-        public ActionResult Info(string email)
+        public ActionResult Info()
         {
-            var user = UserService.GetUserInfo(email);
             ViewBag.IsAdmin = Auth.CurrentUser.IsInRole("Admin");
-            var infoUser = user.ToUserInfoMapModel();
-            return View(infoUser);
+            return View(CurrentUser);
         }
 
 
-        public ActionResult Edit(string email)
+        public ActionResult Edit()
         {
-            if (email == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-            var userEdit = UserService.GetUserInfo(email);
-            if (userEdit == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-            return View(userEdit.ToUserInfoMapModel());
+            return View(CurrentUser);
         }
 
         [HttpPost, ActionName("Edit")]
@@ -99,7 +88,7 @@ namespace FileBox.Web.Areas.Default.Controllers
                 var user = uModel.ToUserInfo();
                 UserService.UpdateUserInfo(user);
                 UserService.SaveUserInfo();
-                return RedirectToAction("Info", "User", new { email = uModel.Email });
+                return RedirectToAction("Info", "User");
             }
             return View(uModel);
         }

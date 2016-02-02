@@ -12,7 +12,7 @@
 <body>
     @if (IsSectionDefined("nav"))
     {
-        RenderSection("nav");
+        @RenderSection("nav");
     }
     else
     {
@@ -46,7 +46,7 @@
     </div>
     @if (IsSectionDefined("footer"))
     {
-        RenderSection("footer");
+        @RenderSection("footer");
     }
     else
     {
