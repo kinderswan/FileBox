@@ -40,7 +40,7 @@ namespace FileBox.Web.Areas.Default.Controllers
         [ChildActionOnly]
         public ActionResult FilesData(int id)
         {
-            var files = FileService.GetFilesInfos().Where(f => f.UserInfoID == id).Select(t => t.ToFilesInfoMapModel());
+            var files = FileService.GetFilesInfos(f => f.UserInfoID == id).Select(t => t.ToFilesInfoMapModel());
             return PartialView("_File", files);
         }
     }

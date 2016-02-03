@@ -76,8 +76,7 @@ namespace FileBox.Web.Areas.Default.Controllers
         [HttpPost, ActionName("Edit")]
         public ActionResult EditUser(UserInfoMapModel uModel)
         {
-            if (UserService.GetUserInfos()
-                    .Where(u => u.Login != CurrentUser.Login)
+            if (UserService.GetUserInfos(u => u.Login != CurrentUser.Login)
                     .Any(p => p.Login == uModel.Login))
             {
                 ModelState.AddModelError("Login", "Sorry, user with the same login is already exists");

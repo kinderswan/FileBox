@@ -43,7 +43,6 @@ namespace FileBox.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(404);
             }
-
             var file = FileService.GetFileInfo((int)id);
             if (file == null)
             {

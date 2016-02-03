@@ -194,10 +194,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\FileBoxDB.mdf" />
-    <Content Include="App_Data\FileBoxDB_log.ldf">
-      <DependentUpon>FileBoxDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\images\bg-filebox.png" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
@@ -279,6 +275,7 @@
     <Content Include="Scripts\jquery-2.2.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Default\Models\" />

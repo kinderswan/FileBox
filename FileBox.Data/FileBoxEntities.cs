@@ -12,10 +12,11 @@ namespace FileBox.Data
 {
     public class FileBoxEntities : DbContext
     {
-        static FileBoxEntities()
+        static FileBoxEntities()//for lazy context seeding
         {
             System.Data.Entity.Database.SetInitializer(new FileBoxSeedData());
         }
+
         public FileBoxEntities() : base("FileBoxEntities") { }
         public FileBoxEntities(string connectionString) : base(connectionString) { }
 

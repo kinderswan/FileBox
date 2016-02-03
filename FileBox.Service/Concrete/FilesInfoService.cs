@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using FileBox.Data.Infrastructure.Interfaces;
 using FileBox.Data.Repository.Interfaces;
 using FileBox.Model.Models;
@@ -20,6 +22,11 @@ namespace FileBox.Service.Concrete
         public IEnumerable<FilesInfo> GetFilesInfos()
         {
             return _filesInfoRepository.GetAll();
+        }
+
+        public IEnumerable<FilesInfo> GetFilesInfos(Expression<Func<FilesInfo, bool>> where)
+        {
+            return _filesInfoRepository.GetMany(where);
         }
 
         public FilesInfo GetFileInfo(int id)

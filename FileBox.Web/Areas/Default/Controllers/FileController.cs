@@ -57,13 +57,12 @@ namespace FileBox.Web.Areas.Default.Controllers
             var fileName = String.Format("{0}{1}", file.FileName, file.Extension);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
-        
+
         public ActionResult Delete(int id)
         {
             FileService.DeleteFileInfo(id);
             FileService.SaveFileInfo();
-            return PartialView("_File", FileService.GetFilesInfos()
-                    .Where(f => f.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
+            return PartialView("_File", FileService.GetFilesInfos(f => f.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
         }
 
         [HttpPost]
@@ -74,11 +73,9 @@ namespace FileBox.Web.Areas.Default.Controllers
                 return PartialView("_File", FileService.GetFilesInfos()
                     .Where(f => f.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
             }
-            var files = FileService.GetFilesInfos()
-                    .Where(f => f.UserInfoID == CurrentUser.UserInfoID)
+            var files = FileService.GetFilesInfos(f => f.UserInfoID == CurrentUser.UserInfoID)
                     .Where(f => f.FileName.ToLower().Contains(findFiles));
-            var extNames = FileService.GetFilesInfos()
-                    .Where(f => f.UserInfoID == CurrentUser.UserInfoID)
+            var extNames = FileService.GetFilesInfos(f => f.UserInfoID == CurrentUser.UserInfoID)
                     .Where(f => f.Extension.ToLower().Contains(findFiles));
             var viewFiles = files.Concat(extNames).Select(f => f.ToFilesInfoMapModel());
             return PartialView("_File", viewFiles);
@@ -101,7 +98,7 @@ namespace FileBox.Web.Areas.Default.Controllers
                 FileService.SaveFileInfo();
             }
             ModelState.Clear();
-            return PartialView("_File", FileService.GetFilesInfos().Where(u => u.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
+            return PartialView("_File", FileService.GetFilesInfos(u => u.UserInfoID == CurrentUser.UserInfoID).Select(t => t.ToFilesInfoMapModel()));
         }
 
 

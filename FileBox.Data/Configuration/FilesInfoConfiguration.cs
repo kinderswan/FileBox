@@ -16,7 +16,7 @@ namespace FileBox.Data.Configuration
             ToTable("FilesInfo");
             HasKey(f => f.FilesInfoID);
             Property(f => f.FilesInfoID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(f => f.Extension).HasMaxLength(6);
+            Property(f => f.Extension);
             Property(f => f.FileName).IsRequired();
         }
     }

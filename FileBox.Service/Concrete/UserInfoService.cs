@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using FileBox.Data.Infrastructure.Interfaces;
 using FileBox.Data.Repository.Interfaces;
 using FileBox.Model.Models;
@@ -22,6 +23,11 @@ namespace FileBox.Service.Concrete
         public IEnumerable<UserInfo> GetUserInfos()
         {
             return _userInfoRepository.GetAll();
+        }
+
+        public IEnumerable<UserInfo> GetUserInfos(Expression<Func<UserInfo, bool>> where)
+        {
+            return _userInfoRepository.GetMany(where);
         }
 
         public UserInfo GetUserInfo(string email)
